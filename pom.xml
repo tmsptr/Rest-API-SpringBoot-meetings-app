@@ -8,15 +8,19 @@
 		<version>2.7.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.web.meetings</groupId>
+	<groupId>com.tomas</groupId>
 	<artifactId>meetings</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>meetings</name>
-	<description>Demo project for Spring Boot</description>
+	<description>meetings application</description>
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -33,21 +37,10 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			  <groupId>junit</groupId>     <!-- NOT org.junit here -->
-			  <artifactId>junit-dep</artifactId>
-			  <version>4.8.2</version>
-			  <scope>test</scope>
 		</dependency>
 	</dependencies>
 

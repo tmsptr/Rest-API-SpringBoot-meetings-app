@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/head :: head">
-</head>
+<head th:replace="fragments/head :: head"></head>
 <script src="https://use.fontawesome.com/c0c323679c.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/circliful/1.0.2/js/jquery.circliful.min.js"></script>
 <script>
@@ -9,7 +8,7 @@ var meetingData={};
 $(document).ready(function(){
 	loadAllMeetings();
 	
-	 $("#addMeetingBtn").click(function(){
+	$("#addMeetingBtn").click(function(){
 			$("#addMeetingModal").modal('toggle');
 	});
 	
@@ -156,28 +155,7 @@ $(document).ready(function(){
 					$("#errorAlert").modal("show");
 				}
 			});
-	});
-	/* $("#startDatepicker").datetimepicker({
-        //viewMode: "months", 
-        format: "dd-mm-yyyy hh:mm:ss",
-    	//startView: "months", 
-    	//changeMonth: true,
-        //changeYear: true,
-        showButtonPanel: true,
-        //minViewMode: "months",
-        autoclose: true,
-        onClose: function(dateText, inst) { 
-            $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
-        }
-    }); */
-    
-  
-    /* loadCategoryTableData();
-    loadAccountTableData();
-    loadBudgetChartData((monthNames[d.getMonth()]+"/"+new Date().getFullYear()));
-    loadGraph(((new Date().getMonth())+1)+"-"+new Date().getFullYear());
-    loadTransactionTableData(((new Date().getMonth())+1)+"-"+new Date().getFullYear()); */
-    
+	});  
 });
 
 function viewMeetingMembers(data){
@@ -295,224 +273,220 @@ function loadAllMeetings() {
 	ApplyPicker();
 }
 </script>
-<body>
 
+<body>
 <!--Navbar-->
 <nav th:replace="fragments/header :: nav"></nav>
 
-
-
 <div style="padding-bottom:10px;">
     <div class="row">
-    <div class="card col-12 mx-auto" style="width: 20rem; margin-top: 10px;padding:25px">
-    	<H3>Meetings </H3>
-    	<div class="" style="">
-        <button type="button" id="addMeetingBtn"class="btn btn-success" style="float: right;margin-top:-50px" data-toggle="modal"><i class="fa fa-plus-circle fa-fw"></i> Create Meetings</button>
-    </div>
-    <table class='table table-hover'><thead><tr><th scope='col'>#</th><th scope='col'>Name</th><th scope='col'>Responsible Person</th><th scope='col'>Description</th><th scope='col'>Category</th><th scope='col'>Type</th><th scope='col'>Start date</th><th scope='col'>End date</th><th scope='col' style='width:165px'>Members</th><th scope='col'>ACTION</th></tr></thead><thead><tr><th scope='col'>#</th><th><input type='text' class='form-control' placeholder="Search Name" id='nameSearch'/></th><th><input type='text' placeholder="Search Owner" class='form-control' id='responsiblePersonSearch'/></th><th><input type='text' class='form-control' placeholder="Search Description" id='descriptionSearch'/></th><th><input type='text' class='form-control' placeholder="Search category" id='categorySearch'/></th><th><input type='text' class='form-control' placeholder="Search Type" id='typeSearch'/></th><th><input class='form-control' placeholder="Search Startdate" type='text'  id='startDateSearch'/></th><th><input class='form-control' type='text' placeholder="Search Enddate" id='endDateSearch'/></th><th><input type='text' class='form-control' placeholder="No Of Attendies" id='noOfMembersSearch'/></th><th><button type='button'class='btn btn-primary' onclick='searchMeetings()' id='searchSubmit'><i class='fa fa-search'></i>&nbsp;SEARCH</button></th></tr></thead>
-       	<tbody id="meetingsTable"></tbody></table>
-
-    </div>
+		<div class="card col-12 mx-auto" style="width: 20rem; margin-top: 10px;padding:25px">
+			<H3>Meetings</H3>
+			<div class="" style="">
+				<button type="button" id="addMeetingBtn" class="btn btn-success" style="float: right;margin-top:-50px" data-toggle="modal"><i class="fa fa-plus-circle fa-fw"></i> Create Meetings</button>
+			</div>
+			<table class='table table-hover'>
+				<thead><tr><th scope='col'>#</th><th scope='col'>Name</th><th scope='col'>Responsible Person</th><th scope='col'>Description</th><th scope='col'>Category</th><th scope='col'>Type</th><th scope='col'>Start date</th><th scope='col'>End date</th><th scope='col' style='width:165px'>Members</th><th scope='col'>ACTION</th></tr></thead>
+				<thead><tr><th scope='col'>#</th><th><input type='text' class='form-control' placeholder="Search Name" id='nameSearch'/></th><th><input type='text' placeholder="Search Owner" class='form-control' id='responsiblePersonSearch'/></th><th><input type='text' class='form-control' placeholder="Search Description" id='descriptionSearch'/></th><th><input type='text' class='form-control' placeholder="Search category" id='categorySearch'/></th><th><input type='text' class='form-control' placeholder="Search Type" id='typeSearch'/></th><th><input class='form-control' placeholder="Search Startdate" type='text'  id='startDateSearch'/></th><th><input class='form-control' type='text' placeholder="Search Enddate" id='endDateSearch'/></th><th><input type='text' class='form-control' placeholder="No Of Attendies" id='noOfMembersSearch'/></th><th><button type='button'class='btn btn-primary' onclick='searchMeetings()' id='searchSubmit'><i class='fa fa-search'></i>&nbsp;SEARCH</button></th></tr></thead>
+				<tbody id="meetingsTable"></tbody>
+			</table>
+		</div>
     </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 <div class="modal" id="addMeetingModal" tabindex="-1" role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="categoryModalLabel">CREATE MEETING</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      
-       	<div class="form-group">
-		    <label for="exampleInputEmail1">Name</label>
-		    <input type="text" class="form-control" id="meetingName" placeholder="Category Name">
-		  </div>
-		  <div class="form-group">
-		    <label for="exampleInputEmail1">Responsible Person</label>
-		    <input type="text" class="form-control" id="meetingOwner" placeholder="Category Name">
-		  </div>
-		  <div class="form-group">
-		    <label for="exampleFormControlTextarea1">Description</label>
-		    <textarea class="form-control" id="meetingDesc" rows="3"></textarea>
-		  </div>
-		  <div class="form-group">
-		      <select id="categoryType" class="form-control" style="height:34px !important">
-		      	<option selected disabled>Select Category</option>
-		        <option value="CodeMonkey">CodeMonkey</option>
-		        <option value="Hub">Hub</option>
-		        <option value="Short">Short</option>
-		        <option value="TeamBuilding">TeamBuilding</option>
-		      </select>
-		    </div>
-		    
-		    <div class="form-group">
-		      <select id="typeValue" class="form-control" placeholder="Type" style="height:34px !important">
-		      	<option selected disabled>Select Type</option>
-		        <option  value="Live">Live</option>
-		        <option value="InPerson">InPerson</option>
-		      </select>
-		    </div>
-		    <div class="form-group">
-		    <label for="exampleInputEmail1">Select Start Date</label>
-		      <input class="form-control" type="text" id="startDatepicker">
-		    </div>
-		    
-		     <div class="form-group">
-		    <label for="exampleInputEmail1">Select End Date</label>
-		      <input class="form-control" type="text" id="endDatepicker">
-		    </div>
-      </div>
-      <div class="modal-footer">
-        
-        <button type="button" id="addMeetingSubmit" class="btn btn-primary">CREATE</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
-      </div>
-    </div>
-  </div>
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			
+			<div class="modal-header">
+				<h4 class="modal-title" id="categoryModalLabel">CREATE MEETING</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			
+			<div class="modal-body">			
+				<div class="form-group">
+					<label for="exampleInputEmail1">Name</label>
+					<input type="text" class="form-control" id="meetingName" placeholder="Category Name">
+				</div>
+				
+				<div class="form-group">
+					<label for="exampleInputEmail1">Responsible Person</label>
+					<input type="text" class="form-control" id="meetingOwner" placeholder="Category Name">
+				</div>
+				
+				<div class="form-group">
+					<label for="exampleFormControlTextarea1">Description</label>
+					<textarea class="form-control" id="meetingDesc" rows="3"></textarea>
+				</div>
+				
+				<div class="form-group">
+					<select id="categoryType" class="form-control" style="height:34px !important">
+						<option selected disabled>Select Category</option>
+						<option value="CodeMonkey">CodeMonkey</option>
+						<option value="Hub">Hub</option>
+						<option value="Short">Short</option>
+						<option value="TeamBuilding">TeamBuilding</option>
+					</select>
+				</div>					
+				
+				<div class="form-group">
+					<select id="typeValue" class="form-control" placeholder="Type" style="height:34px !important">
+						<option selected disabled>Select Type</option>
+						<option  value="Live">Live</option>
+						<option value="InPerson">InPerson</option>
+					</select>
+				</div>
+				
+				<div class="form-group">
+					<label for="exampleInputEmail1">Select Start Date</label>
+					<input class="form-control" type="text" id="startDatepicker">
+				</div>
+					
+				<div class="form-group">
+					<label for="exampleInputEmail1">Select End Date</label>
+					<input class="form-control" type="text" id="endDatepicker">
+				</div>
+			</div>
+			
+			<div class="modal-footer">				
+				<button type="button" id="addMeetingSubmit" class="btn btn-primary">CREATE</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div class="modal" id="deleteMeetingModal" tabindex="-1" role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="categoryModalLabel">Delete Meeting</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      
-		  <div class="form-group">
-		    <label for="exampleInputEmail1">Meeting Responsible Person</label>
-		    <input type="text" class="form-control" id="meetingOwnerDelete" placeholder="Responsible Person Name">
-		  </div>
-		  <div class="form-group">
-		    <input type="text" hidden="true" class="form-control" id="meetingIdDelete" placeholder="Category Name">
-		  </div>
-      </div>
-      <div class="modal-footer">
-        
-        <button type="button" id="deleteMeetingClick" class="btn btn-primary">DELETE</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
-      </div>
-    </div>
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="categoryModalLabel">Delete Meeting</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			
+			<div class="modal-body">			
+				<div class="form-group">
+					<label for="exampleInputEmail1">Meeting Responsible Person</label>
+					<input type="text" class="form-control" id="meetingOwnerDelete" placeholder="Responsible Person Name">
+				</div>
+				
+				<div class="form-group">
+					<input type="text" hidden="true" class="form-control" id="meetingIdDelete" placeholder="Category Name">
+				</div>
+			</div>
+			
+			<div class="modal-footer">			
+				<button type="button" id="deleteMeetingClick" class="btn btn-primary">DELETE</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+			</div>
+		</div>
   </div>
 </div>
 
 <div class="modal" id="addMembersModal" tabindex="-1" role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="categoryModalLabel">ADD MEMBER</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      
-		  <div class="form-group">
-		    <label for="exampleInputEmail1">Member Name</label>
-		    <input type="text" class="form-control" id="meetingAddMember" placeholder="Member Name">
-		  </div>
-		  <div class="form-group">
-		    <input type="text" hidden="true" class="form-control" id="meetingIdAddMember" placeholder="Category Name">
-		  </div>
-      </div>
-      <div class="modal-footer">
-        
-        <button type="button" id="addMembersMeetingClick" class="btn btn-primary">ADD</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
-      </div>
-    </div>
-  </div>
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="categoryModalLabel">ADD MEMBER</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			
+			<div class="modal-body">			
+				<div class="form-group">
+					<label for="exampleInputEmail1">Member Name</label>
+					<input type="text" class="form-control" id="meetingAddMember" placeholder="Member Name">
+				</div>
+				
+				<div class="form-group">
+					<input type="text" hidden="true" class="form-control" id="meetingIdAddMember" placeholder="Category Name">
+				</div>
+			</div>
+			
+			<div class="modal-footer">				
+				<button type="button" id="addMembersMeetingClick" class="btn btn-primary">ADD</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
+			</div>
+		</div>
+	</div>
 </div>
+
 <div class="modal" id="removeMembersModal" tabindex="-1" role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="categoryModalLabel">REMOVE MEMBER</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      
-		  <div class="form-group">
-		    <label for="exampleInputEmail1">Member Name</label>
-		    <input type="text" class="form-control" id="meetingRemoveMember" placeholder="Member Name">
-		  </div>
-		  <div class="form-group">
-		    <input type="text" hidden="true" class="form-control" id="meetingIdRemoveMember" placeholder="Category Name">
-		  </div>
-      </div>
-      <div class="modal-footer">
-        
-        <button type="button" id="removeMembersMeetingClick" class="btn btn-primary">REMOVE</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
-      </div>
-    </div>
-  </div>
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="categoryModalLabel">REMOVE MEMBER</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			
+			<div class="modal-body">			
+				<div class="form-group">
+					<label for="exampleInputEmail1">Member Name</label>
+					<input type="text" class="form-control" id="meetingRemoveMember" placeholder="Member Name">
+				</div>
+				
+				<div class="form-group">
+					<input type="text" hidden="true" class="form-control" id="meetingIdRemoveMember" placeholder="Category Name">
+				</div>
+			</div>
+			
+			<div class="modal-footer">			
+				<button type="button" id="removeMembersMeetingClick" class="btn btn-primary">REMOVE</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div class="modal" id="viewMembersModal" tabindex="-1" role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="categoryModalLabel">VIEW MEMBERS</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      		<div id="viewMembersList"></div>
-		  
-      </div>
-      <div class="modal-footer">
-        
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
-      </div>
-    </div>
-  </div>
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="categoryModalLabel">VIEW MEMBERS</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			
+			<div class="modal-body">
+					<div id="viewMembersList"></div>
+				
+			</div>
+			
+			<div class="modal-footer">				
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div class="modal" id="successAlert" role="dialog" aria-labelledby="successAlertLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content" style="text-align: center;padding:50px">
-    	<i class="fa fa-check-circle  fa-5x" aria-hidden="true" style="color: green;"></i><br>
-    	<span id="successMsg"></span><br><br>
-      	<button type="button" class="btn btn-success" data-dismiss="modal">Okay</button>
-    </div>
-  </div>
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" style="text-align: center;padding:50px">
+			<i class="fa fa-check-circle  fa-5x" aria-hidden="true" style="color: green;"></i><br>
+			<span id="successMsg"></span><br><br>
+			<button type="button" class="btn btn-success" data-dismiss="modal">Okay</button>
+		</div>
+	</div>
 </div>
 
 <div class="modal" id="errorAlert" role="dialog" aria-labelledby="successAlertLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content" style="text-align: center;padding:50px">
-    	<i class="fa fa-times-circle  fa-5x" aria-hidden="true" style="color: red;"></i><br>
-    	<span id="errorMsg"></span><br>
-      	<button type="button" class="btn btn-success" data-dismiss="modal">Okay</button>
-    </div>
-  </div>
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" style="text-align: center;padding:50px">
+			<i class="fa fa-times-circle  fa-5x" aria-hidden="true" style="color: red;"></i><br>
+			<span id="errorMsg"></span><br>
+			<button type="button" class="btn btn-success" data-dismiss="modal">Okay</button>
+		</div>
+	</div>
 </div>
-<!--<footer th:replace="fragments/footer :: footer"></footer>-->
-<div th:replace="fragments/jsScripts :: scripts"></div>
 
+<div th:replace="fragments/jsScripts :: scripts"></div>
 </body>
 </html>
