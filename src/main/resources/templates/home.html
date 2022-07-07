@@ -171,6 +171,7 @@ function viewMeetingMembers(data){
 	$("#viewMembersModal").children('.modal-dialog').children('.modal-content').children('.modal-body').children("#viewMembersList").html(members);
 	$("#viewMembersModal").modal('toggle');
 }
+
 function addMeetingMembers(data){
 	$("#meetingIdAddMember").val(meetingData[data].meetingId);
 	$("#addMembersModal").modal('toggle');
@@ -214,15 +215,10 @@ function searchMeetings() {
 	 
 }
 
-
-
-
-
 function deleteMeeting(data){
 	$("#meetingIdDelete").val(meetingData[data].meetingId);
 	$("#deleteMeetingModal").modal('toggle');
 }
-
 
 function ApplyPicker() {
 	$('#startDateSearch').datetimepicker({
@@ -244,6 +240,7 @@ function ApplyPicker() {
     });
 	$("#endDateSearch").val(null);
 }
+
 function loadAllMeetings() {
 	$.ajax({
 	    type:"get",

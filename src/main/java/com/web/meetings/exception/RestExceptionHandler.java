@@ -15,5 +15,4 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), HttpStatus.BAD_REQUEST.toString());
 		return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
 	}
-
 }

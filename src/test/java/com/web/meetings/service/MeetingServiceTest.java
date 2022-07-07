@@ -28,6 +28,7 @@ import com.web.meetings.model.MemberModel;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@SuppressWarnings({"unchecked", "unused"})
 public class MeetingServiceTest {
 	
 	@Autowired
@@ -35,6 +36,7 @@ public class MeetingServiceTest {
 	
 	@MockBean 
 	private ObjectMapper objectMapper;
+	
 	
 	@Test
   	void createMeeting() throws Exception {
@@ -106,6 +108,7 @@ public class MeetingServiceTest {
 			assertThat(e.getMessage()).isEqualTo("Reponsible person cannot be added again in same meeting");
 		}
     }
+	
 	@Test
   	void removeMemberMeetingOwnerError() throws Exception {
 		try {
@@ -122,10 +125,10 @@ public class MeetingServiceTest {
 	@Test
   	void removeMemberMeetingUserError() throws Exception {
 		try {
-			List<MeetingModel> list = new ArrayList<>();
-			MeetingModel meetingModel2 = getMeetingModel();
-			meetingModel2.setMembers(new ArrayList<>());
-			list.add(meetingModel2);
+		List<MeetingModel> list = new ArrayList<>();
+		MeetingModel meetingModel2 = getMeetingModel();
+		meetingModel2.setMembers(new ArrayList<>());
+		list.add(meetingModel2);
 		TypeReference<List<MeetingModel>> mapType = new TypeReference<List<MeetingModel>>() {};
 		Mockito.when(objectMapper.readValue(any(File.class), any(TypeReference.class))).thenReturn(list); 
 		meetingService.removeMemberInMeeting(getMembersDto1());
@@ -133,7 +136,6 @@ public class MeetingServiceTest {
 			assertThat(e.getMessage()).isEqualTo("Reponsible person cannot be removed in same meeting");
 		}
     }
-	
 	
 	@Test
   	void addMemberMeetingNewMemberError() throws Exception {
@@ -144,7 +146,6 @@ public class MeetingServiceTest {
 		TypeReference<List<MeetingModel>> mapType = new TypeReference<List<MeetingModel>>() {};
 		Mockito.when(objectMapper.readValue(any(File.class), any(TypeReference.class))).thenReturn(list); 
 		MemberModel meetingModel = meetingService.addMemberInMeeting(getMembersDto1());
-		
     }
 	
 	private MeetingModel getMeetingModel() {
@@ -169,9 +170,9 @@ public class MeetingServiceTest {
 		dto.setCategory(Category.CODE_MONKEY.toString());
 		dto.setStartDate("02-07-2022 12:30:16");
 		dto.setEndDate("02-07-2022 12:30:16");
-		
 		return dto;
 	}
+	
 	private MemberModel getMemberModel() {
 		MemberModel member = new MemberModel();
 		member.setMemberName("Test");
@@ -192,5 +193,4 @@ public class MeetingServiceTest {
 		dto.setMeetingId("Test");
 		return dto;
 	}
-
 }

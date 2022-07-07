@@ -23,7 +23,6 @@ import com.web.meetings.model.MeetingModel;
 import com.web.meetings.model.MemberModel;
 import com.web.meetings.service.MeetingService;
 
-
 @RestController
 @CrossOrigin
 @RequestMapping("/api/meeting")

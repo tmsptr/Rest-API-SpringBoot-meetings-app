@@ -10,5 +10,4 @@ public class HomeController {
 	public String showHomeForm() {
 		return "home";
 	}
-
 }

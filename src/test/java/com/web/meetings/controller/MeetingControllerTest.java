@@ -12,12 +12,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
@@ -28,7 +26,6 @@ import com.web.meetings.model.MeetingModel;
 import com.web.meetings.model.MemberModel;
 import com.web.meetings.service.MeetingService;
 
-@ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = MeetingController.class)
 @AutoConfigureMockMvc(addFilters = false)
 public class MeetingControllerTest {
@@ -42,24 +39,25 @@ public class MeetingControllerTest {
 	private ObjectMapper objectMapper;
 	
 	@Test
-	  void createMeetingTest() throws Exception {
-		  when(meetingService.createNewMeeting(any(MeetingDto.class))).thenReturn(getMeetingModel()); 
-		  MvcResult mvcResult = mockMvc.perform(post("/api/meeting")
-				  						.contentType("application/json")
-									  	.content(objectMapper.writeValueAsString(getMeetingDto())))
-									  	.andReturn();
-		  String actualResponseBody = mvcResult.getResponse().getContentAsString();
-		  assertThat(mvcResult.getResponse().getStatus()).isEqualTo(201);
-	  }
+	void createMeetingTest() throws Exception {
+	    when(meetingService.createNewMeeting(any(MeetingDto.class))).thenReturn(getMeetingModel()); 
+	    MvcResult mvcResult = mockMvc.perform(post("/api/meeting")
+			  						 .contentType("application/json")
+								  	 .content(objectMapper.writeValueAsString(getMeetingDto())))
+								  	 .andReturn();
+	    String actualResponseBody = mvcResult.getResponse().getContentAsString();
+	    assertThat(mvcResult.getResponse().getStatus()).isEqualTo(201);
+	}
+	
 	@Test
 	void getAllMeetingTest() throws Exception {
 		List<MeetingModel> list = new ArrayList<>();
 		list.add(getMeetingModel());
 		  when(meetingService.getAllMeetings(any(String.class),any(String.class),any(String.class),any(String.class),any(String.class),any(Integer.class),any(Date.class),any(Date.class))).thenReturn(list); 
 		  MvcResult mvcResult = mockMvc.perform(get("/api/meeting")
-				  						.contentType("application/json")
-									  	.content(objectMapper.writeValueAsString(getMeetingDto())))
-									  	.andReturn();
+				  					   .contentType("application/json")
+									   .content(objectMapper.writeValueAsString(getMeetingDto())))
+									   .andReturn();
 		  String actualResponseBody = mvcResult.getResponse().getContentAsString();
 		  System.out.println(actualResponseBody);
 		  assertThat(mvcResult.getResponse().getStatus()).isEqualTo(200);
@@ -69,42 +67,44 @@ public class MeetingControllerTest {
 	void deleteMeetingTest() throws Exception {
 		List<MeetingModel> list = new ArrayList<>();
 		list.add(getMeetingModel());
-		  when(meetingService.deleteMeeting(any(String.class),any(String.class))).thenReturn(list); 
-		  MvcResult mvcResult = mockMvc.perform(delete("/api/meeting/meetingId/person")
-				  						.contentType("application/json")
-									  	.content(objectMapper.writeValueAsString(getMeetingDto())))
-									  	.andReturn();
-		  String actualResponseBody = mvcResult.getResponse().getContentAsString();
-		  System.out.println(actualResponseBody);
-		  assertThat(mvcResult.getResponse().getStatus()).isEqualTo(200);
+		when(meetingService.deleteMeeting(any(String.class),any(String.class))).thenReturn(list); 
+		MvcResult mvcResult = mockMvc.perform(delete("/api/meeting/meetingId/person")
+				  					 .contentType("application/json")
+									 .content(objectMapper.writeValueAsString(getMeetingDto())))
+									 .andReturn();
+		String actualResponseBody = mvcResult.getResponse().getContentAsString();
+		System.out.println(actualResponseBody);
+		assertThat(mvcResult.getResponse().getStatus()).isEqualTo(200);
 	  }
 	
 	@Test
 	void AddMemberMeetingTest() throws Exception {
 		List<MeetingModel> list = new ArrayList<>();
 		list.add(getMeetingModel());
-		  when(meetingService.addMemberInMeeting(any(MembersDto.class))).thenReturn(getMemberModel()); 
-		  MvcResult mvcResult = mockMvc.perform(post("/api/meeting/add-member")
-				  						.contentType("application/json")
-									  	.content(objectMapper.writeValueAsString(getMembersDto())))
-									  	.andReturn();
-		  String actualResponseBody = mvcResult.getResponse().getContentAsString();
-		  System.out.println(actualResponseBody);
-		  assertThat(mvcResult.getResponse().getStatus()).isEqualTo(200);
+		when(meetingService.addMemberInMeeting(any(MembersDto.class))).thenReturn(getMemberModel()); 
+		MvcResult mvcResult = mockMvc.perform(post("/api/meeting/add-member")
+				  					 .contentType("application/json")
+									 .content(objectMapper.writeValueAsString(getMembersDto())))
+									 .andReturn();
+		String actualResponseBody = mvcResult.getResponse().getContentAsString();
+		System.out.println(actualResponseBody);
+		assertThat(mvcResult.getResponse().getStatus()).isEqualTo(200);
 	  }
+	
 	@Test
 	void removeMemberMeetingTest() throws Exception {
 		List<MeetingModel> list = new ArrayList<>();
 		list.add(getMeetingModel());
-		  when(meetingService.removeMemberInMeeting(any(MembersDto.class))).thenReturn(getMemberModel()); 
-		  MvcResult mvcResult = mockMvc.perform(post("/api/meeting/remove-member")
-				  						.contentType("application/json")
-									  	.content(objectMapper.writeValueAsString(getMembersDto())))
-									  	.andReturn();
-		  String actualResponseBody = mvcResult.getResponse().getContentAsString();
-		  System.out.println(actualResponseBody);
-		  assertThat(mvcResult.getResponse().getStatus()).isEqualTo(200);
+		when(meetingService.removeMemberInMeeting(any(MembersDto.class))).thenReturn(getMemberModel()); 
+		MvcResult mvcResult = mockMvc.perform(post("/api/meeting/remove-member")
+				  					 .contentType("application/json")
+									 .content(objectMapper.writeValueAsString(getMembersDto())))
+									 .andReturn();
+		String actualResponseBody = mvcResult.getResponse().getContentAsString();
+		System.out.println(actualResponseBody);
+		assertThat(mvcResult.getResponse().getStatus()).isEqualTo(200);
 	  }
+	
 	private MeetingModel getMeetingModel() {
 		MeetingModel meetingModel = new MeetingModel();
 		meetingModel.setName("Test");
@@ -127,7 +127,6 @@ public class MeetingControllerTest {
 		dto.setCategory("Test");
 		dto.setStartDate("02-07-2022 12:30:16");
 		dto.setEndDate("02-07-2022 12:30:16");
-		
 		return dto;
 	}
 	

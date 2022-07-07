@@ -18,5 +18,4 @@ public class MeetingDto {
 	private String description;
 	private String startDate;
 	private String endDate;
-	
 }

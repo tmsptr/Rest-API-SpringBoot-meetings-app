@@ -20,7 +20,5 @@ public class ErrorResponse {
 		private String message = null;
 
 		@JsonProperty("status")
-		private String status = null;
-		
-		
+		private String status = null;		
 }

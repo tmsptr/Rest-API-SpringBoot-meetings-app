@@ -9,5 +9,4 @@ class MeetingsApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }

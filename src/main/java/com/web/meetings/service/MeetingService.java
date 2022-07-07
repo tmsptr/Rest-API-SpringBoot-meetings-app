@@ -77,8 +77,6 @@ public class MeetingService {
         		.collect(Collectors.toList());
 	}
 
-
-
 	public List<MeetingModel> deleteMeeting(String meetingId, String person){
 		List<MeetingModel> meetings = readJsonFile();
 		Optional<MeetingModel> findFirst = meetings.stream().filter(each -> each.getMeetingId().equals(meetingId) && each.getResponsiblePerson().equalsIgnoreCase(person))
@@ -105,7 +103,6 @@ public class MeetingService {
 			members.setMemberName(membersDto.getMemberName());
 			members.setAddedAt(new Date());
 			
-			
 			Optional<MemberModel> findAny = meeting.getMembers().stream().filter(each -> each.getMemberName().equalsIgnoreCase(membersDto.getMemberName())).findAny();
 			if(findAny.isPresent()) {
 				throw new MeetingException("Member already exist");
@@ -117,7 +114,6 @@ public class MeetingService {
 			}
 		}
 		return null;
-		
 	}
 	
 	public MemberModel removeMemberInMeeting(MembersDto membersDto) {
@@ -135,10 +131,8 @@ public class MeetingService {
 				
 			writeJsonFile(meetings);
 		}
-		return null;
-		
+		return null;	
 	}
-	
 	
 	private List<MeetingModel> readJsonFile(){
 		TypeReference<List<MeetingModel>> mapType = new TypeReference<List<MeetingModel>>() {};
