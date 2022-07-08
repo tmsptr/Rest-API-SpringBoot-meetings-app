@@ -26,13 +26,16 @@ import com.web.meetings.model.MeetingModel;
 import com.web.meetings.model.MemberModel;
 import com.web.meetings.service.MeetingService;
 
+/**
+ * API tests
+ */
 @WebMvcTest(controllers = MeetingController.class)
 @AutoConfigureMockMvc(addFilters = false)
 public class MeetingControllerTest {
 	@Autowired
 	private MockMvc mockMvc;
 	
-	@MockBean 
+	@MockBean // Adds mocks to ApplicationContext, mock replaces existing bean
 	private MeetingService meetingService;
 	
 	@Autowired
@@ -49,7 +52,6 @@ public class MeetingControllerTest {
 	    assertThat(mvcResult.getResponse().getStatus()).isEqualTo(201);
 	}
 	
-	@Test
 	void getAllMeetingTest() throws Exception {
 		List<MeetingModel> list = new ArrayList<>();
 		list.add(getMeetingModel());
@@ -63,7 +65,6 @@ public class MeetingControllerTest {
 		  assertThat(mvcResult.getResponse().getStatus()).isEqualTo(200);
 	  }
 	
-	@Test
 	void deleteMeetingTest() throws Exception {
 		List<MeetingModel> list = new ArrayList<>();
 		list.add(getMeetingModel());
@@ -77,7 +78,6 @@ public class MeetingControllerTest {
 		assertThat(mvcResult.getResponse().getStatus()).isEqualTo(200);
 	  }
 	
-	@Test
 	void AddMemberMeetingTest() throws Exception {
 		List<MeetingModel> list = new ArrayList<>();
 		list.add(getMeetingModel());

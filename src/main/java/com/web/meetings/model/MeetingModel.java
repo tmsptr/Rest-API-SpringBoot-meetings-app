@@ -9,6 +9,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Meeting model used to transfer data between the view and controller of the Spring MVC 
+ * Lombok used
+ * @JsonFormat used to specify how to format fields and/or properties for JSON output
+ */
 @Getter
 @Setter
 @NoArgsConstructor

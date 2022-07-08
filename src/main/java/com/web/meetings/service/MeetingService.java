@@ -23,14 +23,22 @@ import com.web.meetings.exception.MeetingException;
 import com.web.meetings.model.MeetingModel;
 import com.web.meetings.model.MemberModel;
 
+/**
+ * @Service - Class contains working logic of an application
+ */
 @Service
 public class MeetingService {
 	
-	@Autowired
-	ObjectMapper mapper;
+	@Autowired // Enables injection of the object dependency implicitly 
+	ObjectMapper mapper; // Provides functionality for reading and writing JSON
 	
 	private static final String JSON_FILE_PATH = "data.json";
 
+	/**
+	 * Creating new meeting from meeting data transfer object
+	 * Writing it into JSON
+	 * Returning MeetingModel object
+	 */
 	public MeetingModel createNewMeeting(MeetingDto meetingDto) {
 		MeetingModel model = new MeetingModel();
 		model.setName(meetingDto.getName());
@@ -60,6 +68,9 @@ public class MeetingService {
 		return model;
 	}
 
+	/**
+	 * Running search by any/all parameters and gathering data onto new list
+	 */
 	public List<MeetingModel> getAllMeetings(String name, String description,String owner,String category,String type,int noOfAttendies,Date startDate,Date endDate){
         List<MeetingModel> data = readJsonFile();
         Stream<MeetingModel> stream = data.stream();
@@ -77,6 +88,9 @@ public class MeetingService {
         		.collect(Collectors.toList());
 	}
 
+	/**
+	 * Deleting the meeting and updating JSON
+	 */
 	public List<MeetingModel> deleteMeeting(String meetingId, String person){
 		List<MeetingModel> meetings = readJsonFile();
 		Optional<MeetingModel> findFirst = meetings.stream().filter(each -> each.getMeetingId().equals(meetingId) && each.getResponsiblePerson().equalsIgnoreCase(person))
@@ -90,6 +104,9 @@ public class MeetingService {
 		return meetings;
 	}
 
+	/**
+	 * Adding member to the meeting and updating JSON
+	 */
 	public MemberModel addMemberInMeeting(MembersDto membersDto) {
 		List<MeetingModel> meetings = readJsonFile();
 		Optional<MeetingModel> findFirst = meetings.stream().filter(each -> each.getMeetingId().equals(membersDto.getMeetingId())).findFirst();
@@ -116,6 +133,9 @@ public class MeetingService {
 		return null;
 	}
 	
+	/**
+	 * Removing member from the meeting and updating JSON
+	 */
 	public MemberModel removeMemberInMeeting(MembersDto membersDto) {
 		List<MeetingModel> meetings = readJsonFile();
 		
@@ -134,6 +154,9 @@ public class MeetingService {
 		return null;	
 	}
 	
+	/**
+	 * Method used to deserialize (read) from JSON file
+	 */
 	private List<MeetingModel> readJsonFile(){
 		TypeReference<List<MeetingModel>> mapType = new TypeReference<List<MeetingModel>>() {};
         try {
@@ -144,6 +167,9 @@ public class MeetingService {
 		}
 	}
 	
+	/**
+	 * Method used to serialize (write) Java value as JSON output
+	 */
 	private void writeJsonFile(List<MeetingModel> meetingList){
         try {
         	mapper.writeValue(Paths.get(JSON_FILE_PATH).toFile(), meetingList);
@@ -153,6 +179,10 @@ public class MeetingService {
 		}
 	}
 
+	/**
+	 * Converts string into and returns date object 
+	 * If format is wrong shows where exception has happened
+	 */
 	private Date stringToDate(String date) {
 		try {
 			return new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").parse(date);

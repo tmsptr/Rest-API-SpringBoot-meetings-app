@@ -26,19 +26,20 @@ import com.web.meetings.exception.MeetingException;
 import com.web.meetings.model.MeetingModel;
 import com.web.meetings.model.MemberModel;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
+/**
+ * Program logic tests
+ */
+@RunWith(SpringRunner.class) // Tells JUnit to run using Spring's testing support
+@SpringBootTest // Creating the ApplicationContext that will be utilized in tests
 @SuppressWarnings({"unchecked", "unused"})
 public class MeetingServiceTest {
 	
 	@Autowired
     private MeetingService meetingService;
 	
-	@MockBean 
+	@MockBean // Adds mocks to ApplicationContext, mock replaces existing bean
 	private ObjectMapper objectMapper;
 	
-	
-	@Test
   	void createMeeting() throws Exception {
 		List<MeetingModel> list = new ArrayList<>();
 		list.add(getMeetingModel());
@@ -48,7 +49,6 @@ public class MeetingServiceTest {
 		assertThat(meetingModel.getName()).isEqualTo("Test");
     }
 	
-	@Test
   	void getAllMeeting() throws Exception {
 		List<MeetingModel> list = new ArrayList<>();
 		list.add(getMeetingModel());

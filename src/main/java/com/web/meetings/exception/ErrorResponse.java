@@ -16,7 +16,7 @@ public class ErrorResponse {
 			this.status = status;
 		}
 
-		@JsonProperty("message")
+		@JsonProperty("message") // Maps property names with JSON keys during serialization and deserialization
 		private String message = null;
 
 		@JsonProperty("status")

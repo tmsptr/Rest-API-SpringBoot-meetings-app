@@ -1,16 +1,16 @@
 package com.web.meetings.enums;
 
+/**
+ * Variable "value" to be a set of predefined constants
+ * allowing for fixed values selection in "Category" field of meeting creation
+ */
 public enum Category {
 	CODE_MONKEY("CodeMonkey"), HUB("Hub"), SHORT("Short"), TEAM_BUILDING("TeamBuilding");
 	
-	 private final String value;       
+	private final String value;       
 
     private Category(String s) {
-        value = s;
-    }
-
-    public boolean equalsValue(String otherValue) {
-        return value.equals(otherValue);
+        this.value = s;
     }
 
     public String toString() {
